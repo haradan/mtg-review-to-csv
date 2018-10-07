@@ -1,4 +1,4 @@
-package com.github.haradan.mtgtocsv;
+package com.github.haradan.mtgtocsv.mtgio;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

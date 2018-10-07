@@ -1,4 +1,4 @@
-package com.github.haradan.mtgtocsv;
+package com.github.haradan.mtgtocsv.mtgio;
 
 import com.jsoniter.JsonIterator;
 import com.jsoniter.any.Any;

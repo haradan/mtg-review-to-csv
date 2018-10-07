@@ -6,11 +6,11 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SetReviewCardTest {
+public class LSVSetReviewCardTest {
 
 	@Test
 	public void canLoadAerialEngineer() throws Exception {
-		SetReviewCard card = SetReviewCard.builder()
+		LSVSetReviewCard card = LSVSetReviewCard.builder()
 				.title("Aerial Engineer")
 				.loadAPIData().build();
 
@@ -20,7 +20,7 @@ public class SetReviewCardTest {
 
 	@Test
 	public void canLoadMagistratesScepter() throws Exception {
-		SetReviewCard card = SetReviewCard.builder()
+		LSVSetReviewCard card = LSVSetReviewCard.builder()
 				.title("Magistrate’s Scepter")
 				.loadAPIData().build();
 
@@ -30,7 +30,7 @@ public class SetReviewCardTest {
 
 	@Test
 	public void canLoadDragonsHoard() throws Exception {
-		SetReviewCard card = SetReviewCard.builder()
+		LSVSetReviewCard card = LSVSetReviewCard.builder()
 				.title("Dragon’s Hoard")
 				.loadAPIData().build();
 
@@ -40,7 +40,7 @@ public class SetReviewCardTest {
 
 	@Test
 	public void canLoadTectonicRift() throws Exception {
-		SetReviewCard card = SetReviewCard.builder()
+		LSVSetReviewCard card = LSVSetReviewCard.builder()
 				.title("Tectonic Rift")
 				.loadAPIData().build();
 
@@ -50,18 +50,18 @@ public class SetReviewCardTest {
 
 	@Test
 	public void canLoadMultipleCards() throws Exception {
-		SetReviewCard.SetReviewCardBuilder hoardB = SetReviewCard.builder()
+		LSVSetReviewCard.LSVSetReviewCardBuilder hoardB = LSVSetReviewCard.builder()
 				.title("Dragon’s Hoard");
-		SetReviewCard.SetReviewCardBuilder scepterB = SetReviewCard.builder()
+		LSVSetReviewCard.LSVSetReviewCardBuilder scepterB = LSVSetReviewCard.builder()
 				.title("Magistrate’s Scepter");
-		SetReviewCard.SetReviewCardBuilder riftB = SetReviewCard.builder()
+		LSVSetReviewCard.LSVSetReviewCardBuilder riftB = LSVSetReviewCard.builder()
 				.title("Tectonic Rift");
 
-		SetReviewCard.loadAPIData(null, Arrays.asList(hoardB, scepterB, riftB));
+		LSVSetReviewCard.loadAPIData(null, Arrays.asList(hoardB, scepterB, riftB));
 
-		SetReviewCard hoard = hoardB.build();
-		SetReviewCard scepter = scepterB.build();
-		SetReviewCard rift = riftB.build();
+		LSVSetReviewCard hoard = hoardB.build();
+		LSVSetReviewCard scepter = scepterB.build();
+		LSVSetReviewCard rift = riftB.build();
 
 		assertThat(hoard.getRarityCode()).isEqualTo("R");
 		assertThat(hoard.getColourCode()).isEqualTo("");

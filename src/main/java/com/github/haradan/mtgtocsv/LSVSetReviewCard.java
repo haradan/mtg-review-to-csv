@@ -1,5 +1,7 @@
 package com.github.haradan.mtgtocsv;
 
+import com.github.haradan.mtgtocsv.mtgio.CardsAPI;
+import com.github.haradan.mtgtocsv.mtgio.Set;
 import com.jsoniter.any.Any;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +11,7 @@ import java.util.*;
 
 @Builder
 @Getter
-public class SetReviewCard {
+public class LSVSetReviewCard {
 
 	private final String title;
 	private final String colourCode;
@@ -17,11 +19,11 @@ public class SetReviewCard {
 	private final LSVCardRatings ratings;
 	private final String review;
 
-	public static void loadAPIData(Set set, List<SetReviewCardBuilder> builders) throws IOException {
+	public static void loadAPIData(com.github.haradan.mtgtocsv.mtgio.Set set, List<LSVSetReviewCardBuilder> builders) throws IOException {
 
 		List<String> titles = new ArrayList<>(builders.size());
-		Map<String, SetReviewCardBuilder> builderByTitle = new HashMap<>();
-		for(SetReviewCardBuilder builder : builders) {
+		Map<String, LSVSetReviewCardBuilder> builderByTitle = new HashMap<>();
+		for(LSVSetReviewCardBuilder builder : builders) {
 			titles.add(builder.title);
 			builderByTitle.put(builder.title, builder);
 		}
@@ -29,7 +31,7 @@ public class SetReviewCard {
 		Any cards = CardsAPI.loadCards(set, titles);
 		for(Any card : cards) {
 			String name = card.get("name").toString();
-			SetReviewCardBuilder builder = builderByTitle.get(name);
+			LSVSetReviewCardBuilder builder = builderByTitle.get(name);
 			if(builder == null)
 				continue;
 
@@ -38,9 +40,9 @@ public class SetReviewCard {
 		}
 	}
 
-	public static class SetReviewCardBuilder {
+	public static class LSVSetReviewCardBuilder {
 
-		public SetReviewCardBuilder title(String title) {
+		public LSVSetReviewCardBuilder title(String title) {
 			this.title = title
 					.replaceAll("’", "'")
 					.replaceAll("Poison Tip Archer", "Poison-Tip Archer")
@@ -48,11 +50,11 @@ public class SetReviewCard {
 			return this;
 		}
 
-		public SetReviewCardBuilder loadAPIData() throws IOException {
+		public LSVSetReviewCardBuilder loadAPIData() throws IOException {
 			return loadAPIData(null);
 		}
 
-		public SetReviewCardBuilder loadAPIData(Set set) throws IOException {
+		public LSVSetReviewCardBuilder loadAPIData(Set set) throws IOException {
 
 			Any cards = CardsAPI.loadCards(set, title);
 			for(Any card : cards) {

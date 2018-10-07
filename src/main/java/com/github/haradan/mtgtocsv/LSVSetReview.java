@@ -1,6 +1,7 @@
 package com.github.haradan.mtgtocsv;
 
-import com.jsoniter.any.Any;
+import com.github.haradan.mtgtocsv.mtgio.Set;
+import com.github.haradan.mtgtocsv.mtgio.SetsAPI;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
@@ -22,13 +23,13 @@ import java.util.List;
 @Slf4j
 public class LSVSetReview {
 
-	private final List<SetReviewCard> cards;
+	private final List<LSVSetReviewCard> cards;
 
 	public static LSVSetReview fromColourURLs(String... urls) throws IOException, SAXException {
 
 		List<Set> sets = SetsAPI.loadSets();
 
-		List<SetReviewCard> cards = new ArrayList<>();
+		List<LSVSetReviewCard> cards = new ArrayList<>();
 		for(String url : urls)
 			addCards(url, sets, cards);
 
@@ -40,7 +41,7 @@ public class LSVSetReview {
 		try(CSVPrinter printer = CSVFormat.DEFAULT.withRecordSeparator("\n").print(new FileWriter(csv))) {
 			printer.printRecord("Card Name", "Colour", "Rarity", "Rating", "Alt Rating", "Extra Rating", "Raw Ratings", "Review");
 
-			for(SetReviewCard card : cards) {
+			for(LSVSetReviewCard card : cards) {
 				LSVCardRatings ratings = card.getRatings();
 				String[] ratingsArr = ratings.getNRatingsArr(3);
 
@@ -50,7 +51,7 @@ public class LSVSetReview {
 		}
 	}
 
-	private static void addCards(String url, List<Set> sets, List<SetReviewCard> cards) throws IOException, SAXException {
+	private static void addCards(String url, List<Set> sets, List<LSVSetReviewCard> cards) throws IOException, SAXException {
 		Document doc = Jsoup.connect(url).get();
 
 		Element postTitle = doc.selectFirst(".postTitle");
@@ -65,7 +66,7 @@ public class LSVSetReview {
 
 		Element content = doc.selectFirst(".postContent");
 		Elements headers = content.select("h1");
-		List<SetReviewCard.SetReviewCardBuilder> builders = new ArrayList<>();
+		List<LSVSetReviewCard.LSVSetReviewCardBuilder> builders = new ArrayList<>();
 		for(Element header : headers) {
 			Element imgDiv = header.nextElementSibling();
 			if(imgDiv == null || ! imgDiv.is("div"))
@@ -97,15 +98,15 @@ public class LSVSetReview {
 
 			LSVCardRatings ratings = getRatings(ratingHeaders);
 
-			SetReviewCard.SetReviewCardBuilder builder = SetReviewCard.builder()
+			LSVSetReviewCard.LSVSetReviewCardBuilder builder = LSVSetReviewCard.builder()
 					.title(title)
 					.ratings(ratings).review(review);
 			builders.add(builder);
 		}
 
-		SetReviewCard.loadAPIData(postSet, builders);
+		LSVSetReviewCard.loadAPIData(postSet, builders);
 
-		for(SetReviewCard.SetReviewCardBuilder builder : builders) {
+		for(LSVSetReviewCard.LSVSetReviewCardBuilder builder : builders) {
 			cards.add(builder.build());
 		}
 	}
