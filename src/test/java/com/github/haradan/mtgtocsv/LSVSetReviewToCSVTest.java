@@ -105,4 +105,34 @@ public class LSVSetReviewToCSVTest {
 		File file = new File("test/guilds-of-ravnica-ltd.csv");
 		review.outputToCSV(file);
 	}
+
+	@Test
+	public void canConvertDominariaLtdToCSV() throws Exception {
+
+		LSVSetReview review = LSVSetReview.fromColourURLs(
+				"https://www.channelfireball.com/articles/dominaria-limited-set-review-white/",
+				"https://www.channelfireball.com/articles/dominaria-limited-set-review-blue/",
+				"https://www.channelfireball.com/articles/dominaria-limited-set-review-black/",
+				"https://www.channelfireball.com/articles/dominaria-limited-set-review-red/",
+				"https://www.channelfireball.com/articles/dominaria-limited-set-review-green/",
+				"https://www.channelfireball.com/articles/dominaria-limited-set-review-gold-artifacts-and-lands/");
+
+		File file = new File("test/dominaria-ltd.csv");
+		review.outputToCSV(file);
+	}
+
+	@Test
+	public void canConvertDominariaConstructedToCSV() throws Exception {
+
+		LSVSetReview review = LSVSetReview.fromColourURLs(
+				"https://www.channelfireball.com/articles/dominaria-constructed-set-review-white/",
+				"https://www.channelfireball.com/articles/dominaria-constructed-set-review-blue/",
+				"https://www.channelfireball.com/articles/dominaria-constructed-set-review-black/",
+				"https://www.channelfireball.com/articles/dominaria-constructed-set-review-red/",
+				"https://www.channelfireball.com/articles/dominaria-constructed-set-review-green/",
+				"https://www.channelfireball.com/articles/dominaria-constructed-set-review-gold-artifacts-and-lands/");
+
+		File file = new File("test/dominaria-constructed.csv");
+		review.outputToCSV(file);
+	}
 }
