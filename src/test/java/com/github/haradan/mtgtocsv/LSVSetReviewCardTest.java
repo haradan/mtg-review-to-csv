@@ -79,4 +79,14 @@ public class LSVSetReviewCardTest {
     assertThat(rift.getRarityCode()).isEqualTo("U");
     assertThat(rift.getColourCode()).isEqualTo("R");
   }
+
+  @Test
+  public void canLoadAjaniStrengthOfThePride() throws Exception {
+    LSVSetReviewCard card = LSVSetReviewCard.builder()
+            .title("Ajani, Strength of the Pride")
+            .loadAPIData().build();
+
+    assertThat(card.getRarityCode()).isEqualTo("M");
+    assertThat(card.getColourCode()).isEqualTo("W");
+  }
 }

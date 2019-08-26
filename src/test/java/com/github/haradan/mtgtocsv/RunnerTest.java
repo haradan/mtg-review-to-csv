@@ -150,4 +150,19 @@ public class RunnerTest {
     File file = new File("test/war-of-the-spark-ltd.csv");
     review.outputToCSV(file);
   }
+
+  @Test
+  public void canConvertM20LtdToCSV() throws Exception {
+
+    LSVSetReview review = LSVSetReview.fromColourURLs(
+            "https://www.channelfireball.com/articles/core-set-2020-limited-set-review-white/",
+            "https://www.channelfireball.com/articles/core-set-2020-limited-set-review-blue/",
+            "https://www.channelfireball.com/articles/core-set-2020-limited-set-review-black/",
+            "https://www.channelfireball.com/articles/core-set-2020-limited-set-review-red/",
+            "https://www.channelfireball.com/articles/core-set-2020-limited-set-review-green-and-gold/",
+            "https://www.channelfireball.com/articles/core-set-2020-limited-set-review-gold-artifacts-and-lands/");
+
+    File file = new File("test/m20-ltd.csv");
+    review.outputToCSV(file);
+  }
 }
