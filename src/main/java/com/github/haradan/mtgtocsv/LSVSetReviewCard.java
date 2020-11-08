@@ -21,7 +21,7 @@ public class LSVSetReviewCard {
   private final LSVCardRatings ratings;
   private final String review;
 
-  public static void loadAPIData(com.github.haradan.mtgtocsv.mtgio.Set set,
+  public static void loadAPIData(Set set,
       List<LSVSetReviewCardBuilder> builders) throws IOException {
 
     List<String> titles = new ArrayList<>(builders.size());

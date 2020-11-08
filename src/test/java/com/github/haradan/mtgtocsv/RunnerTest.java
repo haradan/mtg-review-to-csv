@@ -165,4 +165,19 @@ public class RunnerTest {
     File file = new File("test/m20-ltd.csv");
     review.outputToCSV(file);
   }
+
+  @Test
+  public void canConvertZendikarRisingLtdToCSV() throws Exception {
+
+    LSVSetReview review = LSVSetReview.fromColourURLs(
+            "https://strategy.channelfireball.com/all-strategy/mtg/channelmagic-articles/zendikar-rising-limited-set-review-mechanics-and-white-cards/",
+            "https://strategy.channelfireball.com/all-strategy/mtg/channelmagic-articles/zendikar-rising-set-review-blue-cards/",
+            "https://strategy.channelfireball.com/all-strategy/mtg/channelmagic-articles/zendikar-rising-limited-set-review-black-cards/",
+            "https://strategy.channelfireball.com/all-strategy/mtg/channelmagic-articles/zendikar-rising-limited-set-review-red-cards/",
+            "https://strategy.channelfireball.com/all-strategy/mtg/channelmagic-articles/zendikar-rising-limited-set-review-green-cards/",
+            "https://strategy.channelfireball.com/all-strategy/mtg/channelmagic-articles/zendikar-rising-limited-set-review-gold-artifact-lands/");
+
+    File file = new File("test/zendikar-rising-ltd.csv");
+    review.outputToCSV(file);
+  }
 }
